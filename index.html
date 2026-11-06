@@ -3,428 +3,509 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Adobong Tiramisu Prints — Shop &amp; Order</title>
-<meta name="description" content="Browse our fanmade prints, see the details, and send your order request right here.">
+<title>Adobong Tiramisu Prints — Price List</title>
+<meta name="description" content="Tap the prices you want, see your total, and download your order summary to send us.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9B%82%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#EFE6D6; --card:#FBF7EF; --ink:#2B2118; --soft:#7A6D5C; --line:#D9CDB8; --accent:#8A5A2B; --accent-ink:#FBF7EF; --field:#FFFFFF; --err:#A3392E; --ok:#2A5C43;
+  --bg:#EFE6D6; --card:#FBF7EF; --ink:#2B2118; --soft:#7A6D5C; --line:#D9CDB8; --accent:#8A5A2B; --accent-ink:#FBF7EF; --field:#FFFFFF; --err:#A3392E; --hl:rgba(138,90,43,.14);
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){ --bg:#1B140E; --card:#261C14; --ink:#F3EADB; --soft:#B3A590; --line:#413326; --accent:#D8A66A; --accent-ink:#1B140E; --field:#1B140E; --err:#E58B7E; --ok:#7CC29B; }
+  :root:not([data-theme="light"]){ --bg:#1B140E; --card:#261C14; --ink:#F3EADB; --soft:#B3A590; --line:#413326; --accent:#D8A66A; --accent-ink:#1B140E; --field:#1B140E; --err:#E58B7E; --hl:rgba(216,166,106,.18); }
 }
-:root[data-theme="dark"]{ --bg:#1B140E; --card:#261C14; --ink:#F3EADB; --soft:#B3A590; --line:#413326; --accent:#D8A66A; --accent-ink:#1B140E; --field:#1B140E; --err:#E58B7E; --ok:#7CC29B; }
+:root[data-theme="dark"]{ --bg:#1B140E; --card:#261C14; --ink:#F3EADB; --soft:#B3A590; --line:#413326; --accent:#D8A66A; --accent-ink:#1B140E; --field:#1B140E; --err:#E58B7E; --hl:rgba(216,166,106,.18); }
 *{box-sizing:border-box;}
 html{scroll-padding-top:env(safe-area-inset-top,0px);}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;padding:20px 12px 110px;}
-.card{max-width:520px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 22px 24px;}
-.head{text-align:center;margin-bottom:18px;}
-.shop{font-weight:700;font-size:24px;letter-spacing:-0.01em;}
-.sub{margin-top:6px;font-size:12.5px;color:var(--soft);}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 0 18px;padding:4px;border:1px solid var(--line);border-radius:30px;}
-.tabs button{border:0;background:transparent;color:var(--ink);font:inherit;font-weight:600;font-size:13.5px;padding:9px 6px;border-radius:26px;cursor:pointer;}
-.tabs button.on{background:var(--accent);color:var(--accent-ink);}
-.badge{display:inline-block;min-width:18px;padding:0 5px;margin-left:4px;border-radius:9px;background:var(--ink);color:var(--card);font-size:11px;line-height:18px;text-align:center;}
-.tabs button.on .badge{background:var(--accent-ink);color:var(--accent);}
-.hint{font-size:12px;color:var(--soft);margin:0 0 8px;text-align:center;}
-details.item{border-bottom:1px dashed var(--line);}
-details.item:last-of-type{border-bottom:none;}
-details.item summary{display:flex;align-items:baseline;gap:10px;padding:12px 0;cursor:pointer;list-style:none;}
-details.item summary::-webkit-details-marker{display:none;}
-.name{font-weight:600;font-size:15.5px;}
-.note{font-size:12px;color:var(--soft);margin-top:2px;}
-.price{margin-left:auto;font-weight:700;font-size:17px;color:var(--accent);white-space:nowrap;}
-.chev{font-size:11px;color:var(--soft);transition:transform .15s;}
-details[open] .chev{transform:rotate(90deg);}
-.qtybadge{display:none;margin-left:6px;padding:1px 8px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-size:11.5px;font-weight:700;}
-.spec{padding:2px 0 14px;font-size:13px;color:var(--soft);}
-.spec img{display:block;width:100%;max-height:260px;object-fit:cover;border-radius:12px;margin-bottom:10px;}
-.spec ul{margin:0 0 10px;padding-left:18px;line-height:1.55;}
-.stepper{display:flex;align-items:center;gap:10px;}
-.stepper button,.mini{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--accent);background:transparent;color:var(--accent);font:inherit;font-size:18px;font-weight:700;cursor:pointer;line-height:1;}
-.stepper .q{min-width:26px;text-align:center;font-weight:700;color:var(--ink);}
-.btn{display:inline-block;padding:11px 24px;border-radius:26px;border:0;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;}
-.btn.alt{background:transparent;color:var(--accent);border:1.5px solid var(--accent);padding:9.5px 22px;}
-.btn[disabled]{opacity:.6;cursor:default;}
-.sec{margin-top:20px;padding-top:15px;border-top:2px solid var(--ink);}
-.sec h2{margin:0 0 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:600;}
-.disc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:6px;}
-.disc div{border:1px solid var(--line);border-radius:10px;padding:8px 4px;text-align:center;font-size:11.5px;color:var(--soft);}
-.disc b{display:block;font-size:15px;color:var(--accent);margin-bottom:1px;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;padding:20px 12px 110px;font-size:14px;}
+.card{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 20px 26px;}
+.head{text-align:center;margin-bottom:16px;}
+.shop{font-weight:700;font-size:26px;letter-spacing:-0.01em;}
+.tag{display:inline-block;margin-top:9px;padding:4px 14px;border-radius:20px;background:var(--ink);color:var(--card);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;}
+.hint{font-size:12.5px;color:var(--soft);margin:14px 0 10px;text-align:center;line-height:1.5;}
+.swipe{display:none;font-size:11.5px;color:var(--accent);text-align:right;margin:0 2px 6px;}
+@media (max-width:640px){.swipe{display:block;}table.pt td.nm{min-width:118px;font-size:12.5px;}.pc{min-width:54px;font-size:13px;}}
+h2.t{margin:22px 0 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:600;}
+.tw{overflow-x:auto;margin:0 -4px;padding:0 4px;-webkit-overflow-scrolling:touch;}
+table.pt{width:100%;border-collapse:separate;border-spacing:0;min-width:600px;font-variant-numeric:tabular-nums;}
+table.pt th{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);font-weight:600;text-align:center;padding:0 4px 8px;border-bottom:1.5px solid var(--ink);vertical-align:bottom;}
+table.pt th:first-child,table.pt td:first-child{text-align:left;position:sticky;left:0;background:var(--card);z-index:1;}
+table.pt th:first-child{padding-left:0;}
+table.pt td{padding:5px 3px;border-bottom:1px dashed var(--line);text-align:center;}
+table.pt td.nm{font-weight:600;font-size:13.5px;padding-right:8px;min-width:150px;}
+table.pt td.mn{font-size:12px;color:var(--soft);white-space:nowrap;}
+.pc{display:block;width:100%;min-width:62px;padding:9px 4px;border:1.5px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink);font:inherit;font-weight:700;font-size:14px;cursor:pointer;position:relative;}
+.pc small{display:block;font-weight:500;font-size:10px;color:var(--soft);line-height:1.2;margin-bottom:1px;}
+.pc:hover{border-color:var(--accent);}
+.pc.on{border-color:var(--accent);background:var(--hl);color:var(--accent);}
+.pc .x{position:absolute;top:-7px;right:-5px;background:var(--accent);color:var(--accent-ink);border-radius:9px;padding:0 6px;font-size:10.5px;line-height:17px;font-weight:700;}
+.note{font-size:12px;color:var(--soft);line-height:1.55;margin-top:8px;}
+.sec{margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);}
+.sec h2{margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:600;}
+.steps{margin:0;padding-left:20px;font-size:13px;line-height:1.65;color:var(--soft);}
 .terms div{position:relative;padding-left:15px;font-size:12.5px;line-height:1.55;color:var(--soft);margin-bottom:4px;}
 .terms div::before{content:'✦';position:absolute;left:0;top:3px;font-size:9px;color:var(--accent);}
-.steps{margin:0;padding-left:20px;font-size:13px;line-height:1.6;color:var(--soft);}
-.center{text-align:center;margin-top:20px;}
+.empty{text-align:center;color:var(--soft);padding:22px 8px;font-size:13.5px;}
+.line{padding:12px 0;border-bottom:1px dashed var(--line);}
+.line:last-child{border-bottom:none;}
+.line .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.line .nm{flex:1 1 180px;font-weight:600;font-size:14px;}
+.line .nm small{display:block;font-weight:400;font-size:11.5px;color:var(--soft);margin-top:2px;}
+.line .amt{font-weight:700;color:var(--accent);white-space:nowrap;min-width:70px;text-align:right;}
+.line .opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.sel,.field input,.field select,.field textarea{padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink);font:inherit;font-size:13.5px;}
+.sel{max-width:100%;}
+.stepper{display:flex;align-items:center;gap:8px;}
+.stepper button{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--accent);background:transparent;color:var(--accent);font:inherit;font-size:18px;font-weight:700;cursor:pointer;line-height:1;}
+.stepper .q{min-width:28px;text-align:center;font-weight:700;}
+.lk{border:0;background:transparent;color:var(--soft);font:inherit;font-size:11.5px;text-decoration:underline;cursor:pointer;padding:2px 4px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;}
+@media (max-width:560px){.grid2{grid-template-columns:1fr;}}
 .field{margin-bottom:12px;}
 .field label{display:block;font-size:12px;font-weight:600;margin-bottom:5px;}
-.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink);font:inherit;font-size:14px;}
-.field textarea{min-height:80px;resize:vertical;}
+.field input,.field select,.field textarea{width:100%;font-size:14px;padding:10px 12px;}
+.field textarea{min-height:76px;resize:vertical;}
 .field .err{display:none;margin-top:4px;font-size:12px;color:var(--err);}
 .field.bad input,.field.bad select{border-color:var(--err);}
 .field.bad .err{display:block;}
-.line{padding:12px 0;border-bottom:1px dashed var(--line);}
-.line:last-child{border-bottom:none;}
-.line .top{display:flex;align-items:center;gap:10px;}
-.line .nm{flex:1;font-weight:600;font-size:14.5px;}
-.line .amt{font-weight:700;color:var(--accent);white-space:nowrap;}
-.chk{display:flex;gap:8px;align-items:flex-start;margin-top:8px;font-size:12.5px;color:var(--soft);}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--soft);margin:2px 0 12px;}
 .est{margin-top:6px;padding:14px;border:1px solid var(--line);border-radius:12px;font-size:13px;}
 .est .r{display:flex;justify-content:space-between;gap:12px;padding:2px 0;font-variant-numeric:tabular-nums;}
-.est .t{font-weight:700;font-size:16px;border-top:1.5px solid var(--ink);margin-top:6px;padding-top:8px;}
+.est .tt{font-weight:700;font-size:17px;border-top:1.5px solid var(--ink);margin-top:6px;padding-top:8px;}
 .est .s{margin-top:8px;font-size:11.5px;color:var(--soft);line-height:1.5;}
-.msg{display:none;margin-top:12px;padding:10px 12px;border-radius:10px;font-size:13px;}
-.msg.bad{display:block;background:rgba(163,57,46,.12);color:var(--err);}
-.empty{text-align:center;color:var(--soft);padding:26px 8px;font-size:13.5px;}
+.btn{display:inline-block;padding:11px 24px;border-radius:26px;border:0;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;}
+.btn.alt{background:transparent;color:var(--accent);border:1.5px solid var(--accent);padding:9.5px 22px;}
+.btn.sm{padding:9px 16px;font-size:13px;}
+.btn[disabled]{opacity:.6;cursor:default;}
+.center{text-align:center;margin-top:18px;}
+.msg{display:none;margin-top:12px;padding:10px 12px;border-radius:10px;font-size:13px;background:rgba(163,57,46,.12);color:var(--err);}
+.msg.on{display:block;}
+.result{margin-top:20px;text-align:center;}
+.result canvas{width:100%;max-width:360px;height:auto;border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.12);background:#fff;}
+.result .acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
+.result p{font-size:12.5px;color:var(--soft);line-height:1.55;max-width:420px;margin:12px auto 0;}
 .bar{position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:var(--card);border-top:1px solid var(--line);display:none;z-index:5;}
-.bar .in{max-width:520px;margin:0 auto;display:flex;align-items:center;gap:12px;}
+.bar .in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:12px;}
 .bar .info{flex:1;font-size:13px;}
-.bar .info b{display:block;font-size:15px;color:var(--accent);}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;}
-.done{text-align:center;padding:10px 0;}
-.done h2{margin:6px 0 8px;font-size:20px;}
-.done p{color:var(--soft);font-size:13.5px;line-height:1.55;margin:0 0 12px;}
-.sum{white-space:pre-wrap;text-align:left;font-size:12px;background:var(--field);border:1px solid var(--line);border-radius:10px;padding:12px;margin:12px 0;}
+.bar .info b{display:block;font-size:16px;color:var(--accent);}
 </style>
 </head>
 <body>
 <main class="card">
   <div class="head">
-    <div class="shop">Adobong Tiramisu Prints</div>
-    <div class="sub">Fanmade prints · browse, tap for details, order right here</div>
+    <div class="shop" id="shopName">Adobong Tiramisu Prints</div>
+    <div class="tag">Price List</div>
   </div>
 
-  <nav class="tabs" role="tablist">
-    <button id="tabProducts" class="on" type="button" role="tab">🛍 Products</button>
-    <button id="tabOrder" type="button" role="tab">📝 Order <span class="badge" id="cartBadge">0</span></button>
-  </nav>
+  <p class="hint">Prices are <b>per piece</b>. Tap a price to add it to your order — your total updates as you go.</p>
 
-  <!-- ===================== PRODUCTS ===================== -->
-  <section id="viewProducts">
-    <p class="hint">Tap a product to see the details and add it to your order.</p>
-    <div id="productList"></div>
+  <h2 class="t">Prints</h2>
+  <div class="swipe">Swipe the table sideways to see all finishes →</div>
+  <div class="tw"><table class="pt" id="mainTable"></table></div>
+  <div class="note">
+    <b>Uncoated</b> comes in glossy or matte paper. <b>Holo / Glitter / Leather / Canvas</b> are matte coats.<br>
+    <b>Holo</b> can be: broken glass, star, heart, rainbow, flowers, snowflakes, fireworks, dot.
+  </div>
 
-    <div class="sec">
-      <h2>Bulk discount — all items together</h2>
-      <div class="disc">
-        <div><b>1%</b>10 pcs</div>
-        <div><b>2%</b>20 pcs</div>
-        <div><b>5%</b>50+ pcs</div>
-      </div>
-      <div class="note" style="text-align:center;">1% off your total for every 10 pieces ordered (max 5%)</div>
+  <h2 class="t">Other products</h2>
+  <div class="tw"><table class="pt" id="otherTable" style="min-width:480px;"></table></div>
+  <div class="note">Passport: personalized (we’ll ask for your name, photo &amp; details in chat) or blank to fill in yourself.</div>
+
+  <!-- ===================== YOUR ORDER ===================== -->
+  <div class="sec" id="orderSec">
+    <h2>Your order</h2>
+    <div id="lines"></div>
+  </div>
+
+  <div class="sec">
+    <h2>Your details</h2>
+    <div class="grid2">
+      <div class="field" id="f_name"><label for="name">Name</label><input id="name" autocomplete="name"><div class="err">Please enter your name.</div></div>
+      <div class="field" id="f_x"><label for="xuser">X (Twitter) username</label><input id="xuser" placeholder="@username" autocapitalize="none"><div class="err">Please enter your X username.</div></div>
     </div>
+    <div class="field" id="f_needed" style="max-width:260px;"><label for="needed">Needed by</label><input id="needed" type="date"><div class="err">Please choose the date you need it by.</div></div>
+    <div class="note" id="rushHint" style="margin:-4px 0 12px;"></div>
+    <label class="chk"><input type="checkbox" id="layout"> <span>I need you to design my layout</span></label>
+    <div class="field"><label for="notes">Notes (optional)</label><textarea id="notes" placeholder="Group/artist, designs, links to your references…"></textarea></div>
+  </div>
 
-    <div class="sec">
-      <h2>How to order</h2>
-      <ol class="steps">
-        <li>Add what you want, then fill out the order form</li>
-        <li>We message you to talk about your order and send a quote</li>
-        <li>Pay the 30% down payment to get started</li>
-        <li>Pay the balance after it’s printed &amp; received</li>
-      </ol>
+  <div class="sec">
+    <h2>Estimated total</h2>
+    <div class="est" id="est"></div>
+    <div class="msg" id="msg"></div>
+    <div class="center"><button class="btn" type="button" id="makeBtn">Create my order summary</button></div>
+  </div>
+
+  <div class="result" id="result" hidden>
+    <canvas id="preview"></canvas>
+    <div class="acts">
+      <button class="btn sm" type="button" id="dlPdf">⬇ PDF</button>
+      <button class="btn sm" type="button" id="dlPng">⬇ Image (PNG)</button>
+      <button class="btn sm alt" type="button" id="cpTxt">📋 Copy text</button>
+      <button class="btn sm alt" type="button" id="shareBtn" hidden>↗ Share</button>
     </div>
+    <p id="sendNote"></p>
+  </div>
 
-    <div class="sec terms">
-      <h2>Good to know</h2>
-      <div>30% down payment to start your order, balance after it is printed &amp; received</div>
-      <div>Shipping fee is shouldered by the buyer (J&amp;T / Lalamove / Grab / Joyride)</div>
-      <div>Please order at least 5 days before your required date. Rush fee: ₱100 for orders needed in 4 days or less</div>
-      <div>Passports: personalized (we’ll ask for your name, photo &amp; details in chat) or blank to fill in yourself</div>
-    </div>
+  <div class="sec">
+    <h2>How to order</h2>
+    <ol class="steps">
+      <li>Tap the prices you want, then fill in your details</li>
+      <li>Create your order summary and send it to us (PDF, image, or copied text)</li>
+      <li>We check it and message you. If it’s doable, we send you the payment form for the 30% down payment</li>
+      <li>Pay the balance after it’s printed &amp; received</li>
+    </ol>
+  </div>
 
-    <div class="center">
-      <button class="btn" type="button" id="goOrder">🛒 Go to order form</button><br>
-      <a class="btn alt" style="margin-top:10px;" href="https://docs.google.com/spreadsheets/d/1JQzZZp1usafY_94tzXnZDbCgeYZ7JrDQSABCM_rivSA/edit?usp=sharing" target="_blank" rel="noopener">✨ See samples</a>
-    </div>
-  </section>
+  <div class="sec terms">
+    <h2>Good to know</h2>
+    <div>Each product has a minimum order, shown in the table</div>
+    <div>30% down payment to start your order, balance after it is printed &amp; received</div>
+    <div>Shipping fee is shouldered by the buyer (J&amp;T / Lalamove / Grab / Joyride)</div>
+    <div>Please order at least 5 days before your required date. Rush fee: ₱100 for orders needed in 4 days or less</div>
+  </div>
 
-  <!-- ===================== ORDER FORM ===================== -->
-  <section id="viewOrder" hidden>
-    <form id="orderForm" novalidate>
-      <div class="sec" style="margin-top:0;border-top:0;padding-top:0;">
-        <h2>Your items</h2>
-        <div id="cartLines"></div>
-        <div class="center" style="margin-top:8px;"><button class="btn alt" type="button" id="addMore">+ Add more items</button></div>
-      </div>
-
-      <div class="sec">
-        <h2>Your details</h2>
-        <div class="field" id="f_name"><label for="name">Full name</label><input id="name" autocomplete="name"><div class="err">Please enter your name.</div></div>
-        <div class="field" id="f_phone"><label for="phone">Contact number</label><input id="phone" type="tel" autocomplete="tel"><div class="err">Please enter your contact number.</div></div>
-        <div class="field" id="f_email"><label for="email">Email address</label><input id="email" type="email" autocomplete="email"><div class="err">Please enter a valid email.</div></div>
-        <div class="field" id="f_x"><label for="xuser">X (Twitter) username</label><input id="xuser" placeholder="@username" autocapitalize="none"><div class="err">Please enter your X username.</div></div>
-        <div class="field" id="f_reach"><label for="reach">Best way to reach you</label>
-          <select id="reach"><option value="">Choose one</option><option>X (Twitter) DM</option><option>Messenger</option><option>Instagram</option><option>Viber / Text</option><option>Email</option></select>
-          <div class="err">Please choose how we can reach you.</div></div>
-      </div>
-
-      <div class="sec">
-        <h2>When do you need it?</h2>
-        <div class="field" id="f_needed"><label for="needed">Needed by</label><input id="needed" type="date"><div class="err">Please choose the date you need it by.</div></div>
-        <div class="note" id="rushHint">Please order at least 5 days before your required date. Orders needed in 4 days or less have a ₱100 rush fee.</div>
-        <div class="field" style="margin-top:12px;"><label for="notes">Anything else we should know?</label><textarea id="notes" placeholder="Group/artist, passport version, blank or personalized, links to your references…"></textarea></div>
-      </div>
-
-      <div class="sec">
-        <h2>Estimated total</h2>
-        <div class="est" id="est"></div>
-      </div>
-
-      <input class="hp" type="text" id="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="msg" id="formMsg"></div>
-      <div class="center"><button class="btn" type="submit" id="submitBtn">Send order request</button></div>
-      <p class="hint" style="margin-top:10px;">This is a request, not a confirmed order yet. We’ll message you with your quote.</p>
-    </form>
-
-    <div id="thanks" class="done" hidden></div>
-  </section>
+  <div class="center">
+    <a class="btn alt" id="samplesBtn" href="https://docs.google.com/spreadsheets/d/1JQzZZp1usafY_94tzXnZDbCgeYZ7JrDQSABCM_rivSA/edit?usp=sharing" target="_blank" rel="noopener">✨ See samples</a>
+  </div>
 </main>
 
-<div class="bar" id="bar"><div class="in"><div class="info"><span id="barCount"></span><b id="barTotal"></b></div><button class="btn" type="button" id="barGo">Order →</button></div></div>
+<div class="bar" id="bar"><div class="in"><div class="info"><span id="barCount"></span><b id="barTotal"></b></div><button class="btn" type="button" id="barGo">View order ↓</button></div></div>
 
 <script>
 /* ============================ SETTINGS — edit these ============================ */
 const CONFIG = {
-  // 1) Go to https://web3forms.com, enter YOUR email, and paste the Access Key they email you here.
-  //    Every order request will then be emailed to you.
-  accessKey: 'YOUR_WEB3FORMS_ACCESS_KEY',
   shop: 'Adobong Tiramisu Prints',
-  dpRate: 0.30,        // down payment
-  discPer10: 1,        // % off per every 10 pieces (all items together)
-  discCap: 5,          // max discount %
-  rushDays: 4,         // needed in this many days or fewer = rush
-  rushFee: 100         // ₱
+  contactHandle: '',      // optional, e.g. '@yourhandle' — shown in the "send it to us" note
+  dpRate: 0.30,           // down payment
+  rushDays: 4,            // needed in this many days or fewer = rush
+  rushFee: 100            // ₱
 };
 
-/* ============================ PRODUCTS — edit these ============================
-   price: pesos · note: small grey text under the name · specs: bullet list in the details
-   layoutFee: ₱ per design if you design it for the customer (leave out if none)
-   min: minimum quantity · img: optional photo, e.g. 'images/passport.jpg' (upload it to the repo) */
-const PRODUCTS = [
-  { name:'Passport (24 pages plus cover)', note:'Personalized or blank', price:45, layoutFee:50,
-    specs:['24 inner pages plus cover','Personalized with your photo & details, or blank to fill in yourself'] },
-  { name:'Passport (Cover only, no inner pages)', price:20, specs:['Cover only, no inner pages'] },
-  { name:'Boarding Pass (4 pcs)', note:'Front only', price:16, layoutFee:20, specs:['4 pcs per set','Printed on the front only'] },
-  { name:'Boarding Pass (4 pcs)', note:'Front & Back', price:30, layoutFee:20, specs:['4 pcs per set','Printed on the front and back'] },
-  { name:'Entry Visa Sticker (9 pcs)', price:20, specs:['9 stickers per set'] },
-  { name:'Polaroid Mini (9 pcs)', price:20, layoutFee:10, specs:['9 pcs per set','Mini size'] },
-  { name:'Polaroid Square (9 pcs)', price:20, layoutFee:10, specs:['9 pcs per set','Square size'] },
-  { name:'Polaroid Wide (5 pcs)', price:20, layoutFee:10, specs:['5 pcs per set','Wide size'] },
-  { name:'Memo Pad (20 sheets, 7.5 × 7.5 cm)', note:'With back cover', price:18, specs:['20 sheets','7.5 × 7.5 cm','With back cover'] },
-  { name:'Memo Pad (20 sheets, 7.5 × 7.5 cm)', note:'No back cover', price:15, specs:['20 sheets','7.5 × 7.5 cm','No back cover'] },
-  { name:'A6 Calendar (4 pcs)', price:20, specs:['4 pcs per set','A6 size'] },
-  { name:'Lollipop Holder (9 pcs)', note:'Holder only', price:20, specs:['9 pcs per set','Holder only'] },
-  { name:'Lollipop Holder (9 pcs)', note:'Packed with lollipop & OPP', price:40, specs:['9 pcs per set','Packed with lollipop & OPP'] },
-  { name:'Photo Strip (6–11 pcs, depends on specification)', note:'No phototop', price:20, specs:['6–11 pcs, depends on specification','No phototop'] },
-  { name:'Photo Strip (6–11 pcs, depends on specification)', note:'With phototop', price:25, specs:['6–11 pcs, depends on specification','With phototop'] },
-  { name:'A4 Poster', note:'5 pcs minimum', price:20, min:5, specs:['A4 size','Minimum order of 5 pcs'] },
-  { name:'Sticker Pack', note:'Without phototop', price:20, specs:['Without phototop'] },
-  { name:'Sticker Pack', note:'With phototop', price:30, specs:['With phototop'] }
+/* ============================ PRODUCTS — edit prices here ============================
+   Prints: [id, name, minimum order, [uncoated, glossy coat, matte coat, holo/glitter/leather/canvas], unit]  */
+const HOLO = ['Broken glass','Star','Heart','Rainbow','Flowers','Snowflakes','Fireworks','Dot'];
+const FINISHES = [
+  {label:'Uncoated', head:'Uncoated', choiceLabel:'Paper', choices:['Glossy paper','Matte paper']},
+  {label:'Glossy coat', head:'Glossy coat'},
+  {label:'Matte coat', head:'Matte coat'},
+  {label:'Holo / Glitter / Leather / Canvas (matte coat)', head:'Holo / Glitter / Leather / Canvas', choiceLabel:'Coat type', choices:['Holo','Glitter','Leather','Canvas'], sub:{Holo:HOLO}, special:true}
 ];
-PRODUCTS.forEach((p,i)=>{ p.id = 'p' + i; });
+const PRINTS = [
+  ['a6cal','A6 Calendar',12,[5,7,8,10]],
+  ['a5cal','A5 Calendar',10,[10,12,13,15]],
+  ['a4cal','A4 Calendar',5,[20,22,23,25]],
+  ['lolli','Lollipop Holder',45,[2.5,3,4,6]],
+  ['lollip','Lollipop Holder (packed)',45,[5,7,8,10]],
+  ['pstrip','Photostrip',40,[2,4,5,7]],
+  ['a4post','A4 Poster Print',5,[20,22,23,25]],
+  ['hbf4','Hand Banner — Front (4 × 11 in)',10,[7,9,10,12]],
+  ['hbb4','Hand Banner — Back-to-back (4 × 11 in)',10,[9,11,12,14]],
+  ['hbf3','Hand Banner — Front (3 × 8 in)',12,[5,7,8,11]],
+  ['hbb3','Hand Banner — Back-to-back (3 × 8 in)',12,[7,9,10,12]],
+  ['stick','Sticker Pack (Die Cut, 10 pcs)',5,[25,27,28,30],'pack'],
+  ['polsq','Polaroid Square',45,[2.5,3,4,6]],
+  ['polmi','Polaroid Mini',45,[3,5,6,8]],
+  ['polwi','Polaroid Wide',25,[4,5,7,9]],
+  ['bpf','Boarding Pass — Front only',20,[5,7,8,10]],
+  ['bpb','Boarding Pass — Back-to-back',20,[8,10,11,12]],
+  ['pcov','Passport Cover — Back-to-back',6,[15,17,18,20]]
+];
+/* Other products: [id, name, minimum, [[option label, price], ...]] */
+const OTHERS = [
+  ['pass','Passport (24 pages)',1,[['Matte coat',105],['Leather coat',110]]],
+  ['memo','Memo Pad (7.75 × 7.75 cm, 20 sheets)',1,[['With backing paper',20],['Without backing paper',18]]]
+];
 
 /* ============================ APP (no need to edit below) ============================ */
 const $ = id => document.getElementById(id);
-const peso = n => '₱' + Number(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+const money = n => { n = Math.round((Number(n)||0)*100)/100; return '₱' + n.toLocaleString('en-PH', {minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2}); };
+const peso = n => '₱' + (Math.round((Number(n)||0)*100)/100).toLocaleString('en-PH', {minimumFractionDigits:2, maximumFractionDigits:2});
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let cart = {};   // id -> { qty, layout }
-try { cart = JSON.parse(localStorage.getItem('atp_cart') || '{}') || {}; } catch(e) { cart = {}; }
-Object.keys(cart).forEach(id => { if(!PRODUCTS.find(p => p.id === id) || !(cart[id].qty > 0)) delete cart[id]; });
-const save = () => { try { localStorage.setItem('atp_cart', JSON.stringify(cart)); } catch(e) {} };
+$('shopName').textContent = CONFIG.shop;
+
+const PRODUCTS = [];
+PRINTS.forEach(r => PRODUCTS.push({id:r[0], name:r[1], min:r[2], unit:r[4]||'pc', opts:FINISHES.map((f,i)=>Object.assign({}, f, {price:r[3][i]}))}));
+OTHERS.forEach(r => PRODUCTS.push({id:r[0], name:r[1], min:r[2], unit:'pc', opts:r[3].map(o=>({label:o[0], head:o[0], price:o[1]}))}));
 const prod = id => PRODUCTS.find(p => p.id === id);
-const qtyOf = id => (cart[id] && cart[id].qty) || 0;
+
+let cart = [];   // {lid, pid, oi, choice, sub, qty}
+let seq = 0;
+const newLine = (pid, oi) => {
+  const p = prod(pid), o = p.opts[oi];
+  const choice = o.choices ? o.choices[0] : '';
+  const sub = (o.sub && o.sub[choice]) ? o.sub[choice][0] : '';
+  return {lid: ++seq, pid, oi, choice, sub, qty: p.min};
+};
 
 function todayStr(){ const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
-function daysUntil(dateStr){ if(!dateStr) return null; const a = Date.parse(todayStr()+'T00:00:00Z'), b = Date.parse(dateStr+'T00:00:00Z'); return isNaN(b) ? null : Math.round((b-a)/86400000); }
+function daysUntil(s){ if(!s) return null; const a = Date.parse(todayStr()+'T00:00:00Z'), b = Date.parse(s+'T00:00:00Z'); return isNaN(b) ? null : Math.round((b-a)/86400000); }
+function niceDate(s){ const d = new Date(s + 'T00:00:00'); return isNaN(d) ? s : d.toLocaleDateString('en-PH', {year:'numeric', month:'short', day:'numeric'}); }
 
+/* ---------- tables ---------- */
+function renderTables(){
+  let h = '<thead><tr><th>Product</th>' + FINISHES.map(f => '<th>' + esc(f.head) + '</th>').join('') + '<th>Min. order</th></tr></thead><tbody>';
+  PRODUCTS.slice(0, PRINTS.length).forEach(p => {
+    h += '<tr><td class="nm">' + esc(p.name) + '</td>' + p.opts.map((o, i) => '<td><button type="button" class="pc" data-pid="' + p.id + '" data-oi="' + i + '" id="c_' + p.id + '_' + i + '">' + money(o.price) + '</button></td>').join('') +
+         '<td class="mn">' + p.min + ' ' + esc(p.unit) + (p.min === 1 ? '' : 's') + '</td></tr>';
+  });
+  $('mainTable').innerHTML = h + '</tbody>';
+  let o = '<thead><tr><th>Product</th><th>Option</th><th>Option</th><th>Min. order</th></tr></thead><tbody>';
+  PRODUCTS.slice(PRINTS.length).forEach(p => {
+    o += '<tr><td class="nm">' + esc(p.name) + '</td>' + p.opts.map((op, i) => '<td><button type="button" class="pc" data-pid="' + p.id + '" data-oi="' + i + '" id="c_' + p.id + '_' + i + '"><small>' + esc(op.label) + '</small>' + money(op.price) + '</button></td>').join('') +
+         '<td class="mn">' + (p.min === 1 ? 'none' : p.min + ' pcs') + '</td></tr>';
+  });
+  $('otherTable').innerHTML = o + '</tbody>';
+}
+function cellClick(e){
+  const b = e.target.closest('button.pc'); if(!b) return;
+  const pid = b.dataset.pid, oi = parseInt(b.dataset.oi);
+  const have = cart.filter(l => l.pid === pid && l.oi === oi);
+  if(have.length) cart = cart.filter(l => !(l.pid === pid && l.oi === oi));
+  else cart.push(newLine(pid, oi));
+  invalidate(); refresh();
+}
+$('mainTable').addEventListener('click', cellClick);
+$('otherTable').addEventListener('click', cellClick);
+
+/* ---------- order ---------- */
+function desc(l){
+  const p = prod(l.pid), o = p.opts[l.oi];
+  if(o.special) return {name: p.name + ' — ' + l.choice + ' coat', detail: l.sub ? 'Style: ' + l.sub : ''};
+  return {name: p.name + ' — ' + o.label, detail: l.choice || ''};
+}
 function calc(){
-  const lines = Object.keys(cart).map(id => ({p:prod(id), qty:cart[id].qty, layout:!!cart[id].layout}));
-  const pieces = lines.reduce((s,l)=>s+l.qty,0);
-  const subtotal = lines.reduce((s,l)=>s+l.qty*l.p.price,0);
-  const pct = Math.min(CONFIG.discCap, Math.floor(pieces/10)*CONFIG.discPer10);
-  const discount = Math.floor(subtotal*pct/100);
-  const layouts = lines.filter(l=>l.layout && l.p.layoutFee).map(l=>({name:l.p.name + (l.p.note?' ('+l.p.note+')':''), fee:l.p.layoutFee}));
-  const layoutTotal = layouts.reduce((s,l)=>s+l.fee,0);
-  const days = daysUntil($('needed').value);
-  const rush = (days !== null && days <= CONFIG.rushDays) ? CONFIG.rushFee : 0;
-  const total = subtotal - discount + layoutTotal + rush;
-  const dp = Math.round(total*CONFIG.dpRate*100)/100;
-  return {lines, pieces, subtotal, pct, discount, layouts, layoutTotal, rush, days, total, dp};
+  const lines = cart.map(l => ({l, p:prod(l.pid), o:prod(l.pid).opts[l.oi]}));
+  const pieces = lines.reduce((s, x) => s + x.l.qty, 0);
+  const subtotal = lines.reduce((s, x) => s + x.l.qty * x.o.price, 0);
+  const d = daysUntil($('needed').value);
+  const rush = (d !== null && d <= CONFIG.rushDays) ? CONFIG.rushFee : 0;
+  const total = subtotal + rush;
+  return {lines, pieces, subtotal, rush, days:d, total, dp: Math.round(total * CONFIG.dpRate * 100) / 100};
 }
-
-/* ---------- products tab ---------- */
-function renderProducts(){
-  $('productList').innerHTML = PRODUCTS.map(p => `
-    <details class="item" data-id="${p.id}">
-      <summary><div><div class="name">${esc(p.name)}<span class="qtybadge" id="qb_${p.id}"></span></div>${p.note?`<div class="note">${esc(p.note)}</div>`:''}</div><div class="price">${peso(p.price).replace('.00','')}</div><span class="chev">▶</span></summary>
-      <div class="spec">
-        ${p.img?`<img src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy">`:''}
-        <ul>${(p.specs||[]).map(s=>`<li>${esc(s)}</li>`).join('')}</ul>
-        <div class="stepper"><button type="button" data-act="dec" data-id="${p.id}" aria-label="Less">−</button><span class="q" id="q_${p.id}">0</span><button type="button" data-act="inc" data-id="${p.id}" aria-label="More">+</button>
-          <span style="color:var(--soft);font-size:12px;">${p.min?'min. '+p.min+' · ':''}added to your order</span></div>
-      </div>
-    </details>`).join('');
-}
-function change(id, delta){
-  const p = prod(id), q = qtyOf(id), min = p.min || 1;
-  let n = q + delta;
-  if(q === 0 && delta > 0) n = min;
-  else if(n < min) n = 0;
-  if(n <= 0) delete cart[id]; else cart[id] = {qty:n, layout: !!(cart[id] && cart[id].layout)};
-  save(); refresh();
-}
-$('productList').addEventListener('click', e => {
-  const b = e.target.closest('button[data-act]'); if(!b) return;
-  change(b.dataset.id, b.dataset.act === 'inc' ? 1 : -1);
-});
-
-/* ---------- order tab ---------- */
 function renderLines(){
   const c = calc();
-  if(!c.lines.length){ $('cartLines').innerHTML = '<div class="empty">Your order is empty. Tap “Add more items” to pick what you want.</div>'; return; }
-  $('cartLines').innerHTML = c.lines.map(l => `
-    <div class="line">
-      <div class="top"><div class="nm">${esc(l.p.name)}${l.p.note?`<div class="note">${esc(l.p.note)}</div>`:''}</div>
-        <div class="stepper"><button type="button" data-act="dec" data-id="${l.p.id}" aria-label="Less">−</button><span class="q">${l.qty}</span><button type="button" data-act="inc" data-id="${l.p.id}" aria-label="More">+</button></div>
-        <div class="amt">${peso(l.qty*l.p.price).replace('.00','')}</div></div>
-      ${l.p.layoutFee?`<label class="chk"><input type="checkbox" data-layout="${l.p.id}" ${l.layout?'checked':''}> <span>Need us to design the layout? +${peso(l.p.layoutFee).replace('.00','')} (once per design, not per piece)</span></label>`:''}
-    </div>`).join('');
+  if(!c.lines.length){ $('lines').innerHTML = '<div class="empty">Nothing here yet. Tap a price in the table above to add it.</div>'; return; }
+  $('lines').innerHTML = c.lines.map(x => {
+    const d = desc(x.l), o = x.o;
+    let opts = '';
+    if(o.choices){
+      opts += '<select class="sel" data-lid="' + x.l.lid + '" data-f="choice" aria-label="' + esc(o.choiceLabel) + '">' + o.choices.map(ch => '<option ' + (ch === x.l.choice ? 'selected' : '') + '>' + esc(ch) + '</option>').join('') + '</select>';
+      const subs = o.sub && o.sub[x.l.choice];
+      if(subs) opts += '<select class="sel" data-lid="' + x.l.lid + '" data-f="sub" aria-label="' + esc(x.l.choice) + ' style">' + subs.map(ch => '<option ' + (ch === x.l.sub ? 'selected' : '') + '>' + esc(ch) + '</option>').join('') + '</select>';
+    }
+    return '<div class="line"><div class="top"><div class="nm">' + esc(d.name) + '<small>' + money(o.price) + ' per ' + esc(x.p.unit) + ' · min. ' + x.p.min + '</small></div>' +
+      '<div class="stepper"><button type="button" data-lid="' + x.l.lid + '" data-q="-1" aria-label="Less">−</button><span class="q">' + x.l.qty + '</span><button type="button" data-lid="' + x.l.lid + '" data-q="1" aria-label="More">+</button></div>' +
+      '<div class="amt">' + money(x.l.qty * o.price) + '</div></div>' +
+      (opts ? '<div class="opts">' + opts + '</div>' : '') +
+      '<div><button type="button" class="lk" data-lid="' + x.l.lid + '" data-rm="1">Remove</button>' + (o.choices ? '<button type="button" class="lk" data-lid="' + x.l.lid + '" data-dup="1">+ add another style</button>' : '') + '</div></div>';
+  }).join('');
 }
-$('cartLines').addEventListener('click', e => { const b = e.target.closest('button[data-act]'); if(b) change(b.dataset.id, b.dataset.act === 'inc' ? 1 : -1); });
-$('cartLines').addEventListener('change', e => { const id = e.target.dataset && e.target.dataset.layout; if(id && cart[id]){ cart[id].layout = e.target.checked; save(); renderEst(); } });
-
+$('lines').addEventListener('click', e => {
+  const b = e.target.closest('button[data-lid]'); if(!b) return;
+  const l = cart.find(x => x.lid === parseInt(b.dataset.lid)); if(!l) return;
+  const p = prod(l.pid);
+  if(b.dataset.q){ const n = l.qty + parseInt(b.dataset.q); if(n < p.min) cart = cart.filter(x => x !== l); else l.qty = n; }
+  else if(b.dataset.rm){ cart = cart.filter(x => x !== l); }
+  else if(b.dataset.dup){ const n = newLine(l.pid, l.oi); cart.splice(cart.indexOf(l) + 1, 0, n); }
+  invalidate(); refresh();
+});
+$('lines').addEventListener('change', e => {
+  const s = e.target.closest('select[data-lid]'); if(!s) return;
+  const l = cart.find(x => x.lid === parseInt(s.dataset.lid)); if(!l) return;
+  l[s.dataset.f] = s.value;
+  if(s.dataset.f === 'choice'){ const o = prod(l.pid).opts[l.oi]; l.sub = (o.sub && o.sub[l.choice]) ? o.sub[l.choice][0] : ''; }
+  invalidate(); refresh();
+});
 function renderEst(){
-  const c = calc();
-  const row = (a,b,cls) => `<div class="r ${cls||''}"><span>${a}</span><span>${b}</span></div>`;
-  let h = '';
-  if(!c.lines.length){ $('est').innerHTML = '<div class="note">Add items to see your estimate.</div>'; return; }
-  h += row(`Subtotal (${c.pieces} pc${c.pieces===1?'':'s'})`, peso(c.subtotal));
-  if(c.discount > 0) h += row(`Bulk discount (${c.pct}%)`, '−' + peso(c.discount));
-  c.layouts.forEach(l => { h += row('Layout — ' + esc(l.name), peso(l.fee)); });
-  if(c.rush > 0) h += row('Rush fee', peso(c.rush));
-  h += row('Estimated total', peso(c.total), 't');
-  h += row(`Down payment (${Math.round(CONFIG.dpRate*100)}%)`, peso(c.dp));
-  h += '<div class="s">This is an estimate. Shipping is paid by the buyer and isn’t included. We’ll confirm everything in your quote.</div>';
-  $('est').innerHTML = h;
-  const hint = $('rushHint');
+  const c = calc(), hint = $('rushHint');
   if(c.days === null) hint.textContent = 'Please order at least 5 days before your required date. Orders needed in 4 days or less have a ₱' + CONFIG.rushFee + ' rush fee.';
-  else if(c.rush > 0) hint.textContent = '⚡ ' + (c.days < 0 ? 'That date has passed.' : c.days + ' day' + (c.days===1?'':'s') + ' from today') + ' — a ₱' + CONFIG.rushFee + ' rush fee applies (' + CONFIG.rushDays + ' days or less).';
+  else if(c.rush > 0) hint.textContent = '⚡ ' + (c.days < 0 ? 'That date has passed.' : c.days + ' day' + (c.days === 1 ? '' : 's') + ' from today') + ' — a ₱' + CONFIG.rushFee + ' rush fee applies (' + CONFIG.rushDays + ' days or less).';
   else hint.textContent = '✓ ' + c.days + ' days from today — no rush fee.';
+  if(!c.lines.length){ $('est').innerHTML = '<div class="note" style="margin:0;">Add items to see your estimate.</div>'; return; }
+  const row = (a, b, cls) => '<div class="r ' + (cls || '') + '"><span>' + a + '</span><span>' + b + '</span></div>';
+  let h = row('Subtotal (' + c.pieces + ' pc' + (c.pieces === 1 ? '' : 's') + ')', peso(c.subtotal));
+  if(c.rush) h += row('Rush fee', peso(c.rush));
+  h += row('Estimated total', peso(c.total), 'tt') + row('Down payment (' + Math.round(CONFIG.dpRate * 100) + '%)', peso(c.dp));
+  h += '<div class="s">This is an estimate. Shipping is paid by the buyer and isn’t included' + ($('layout').checked ? '; layout fee is quoted separately' : '') + '. We’ll confirm everything in your quote.</div>';
+  $('est').innerHTML = h;
 }
-
 function refresh(){
   const c = calc();
-  PRODUCTS.forEach(p => {
-    const q = qtyOf(p.id);
-    const qe = $('q_' + p.id); if(qe) qe.textContent = q;
-    const qb = $('qb_' + p.id); if(qb){ qb.textContent = '× ' + q; qb.style.display = q ? 'inline-block' : 'none'; }
-  });
-  $('cartBadge').textContent = Object.keys(cart).length;
-  const onProducts = !$('viewProducts').hidden;
-  $('bar').style.display = (c.lines.length && onProducts) ? 'block' : 'none';
-  $('barCount').textContent = c.lines.length + ' item' + (c.lines.length===1?'':'s') + ' · ' + c.pieces + ' pc' + (c.pieces===1?'':'s');
-  $('barTotal').textContent = 'Items ' + peso(c.subtotal - c.discount);
+  PRODUCTS.forEach(p => p.opts.forEach((o, i) => {
+    const b = $('c_' + p.id + '_' + i); if(!b) return;
+    const n = cart.filter(l => l.pid === p.id && l.oi === i).reduce((s, l) => s + l.qty, 0);
+    b.classList.toggle('on', n > 0);
+    const old = b.querySelector('.x'); if(old) old.remove();
+    if(n > 0){ const x = document.createElement('span'); x.className = 'x'; x.textContent = '×' + n; b.appendChild(x); }
+  }));
+  $('bar').style.display = c.lines.length ? 'block' : 'none';
+  $('barCount').textContent = c.lines.length + ' item' + (c.lines.length === 1 ? '' : 's') + ' · ' + c.pieces + ' pc' + (c.pieces === 1 ? '' : 's');
+  $('barTotal').textContent = 'Est. total ' + peso(c.total);
   renderLines(); renderEst();
 }
-
-function show(tab){
-  const order = tab === 'order';
-  $('viewProducts').hidden = order; $('viewOrder').hidden = !order;
-  $('tabProducts').classList.toggle('on', !order); $('tabOrder').classList.toggle('on', order);
-  window.scrollTo({top:0, behavior:'smooth'});
-  refresh();
-}
-$('tabProducts').onclick = () => show('products');
-$('tabOrder').onclick = () => show('order');
-$('goOrder').onclick = () => show('order');
-$('barGo').onclick = () => show('order');
-$('addMore').onclick = () => show('products');
-// clear a field's red error as soon as the customer fixes it
-document.querySelectorAll('#orderForm .field input, #orderForm .field select').forEach(el => {
-  const clear = () => { const f = el.closest('.field'); if(f) f.classList.remove('bad'); if(!document.querySelector('#orderForm .field.bad')){ const m = $('formMsg'); if(m.textContent === 'Please fix the highlighted fields.'){ m.className = 'msg'; m.textContent = ''; } } };
-  el.addEventListener('input', clear); el.addEventListener('change', clear);
-});
+$('barGo').onclick = () => $('orderSec').scrollIntoView({behavior:'smooth'});
 $('needed').min = todayStr();
-$('needed').addEventListener('input', renderEst);
-$('needed').addEventListener('change', renderEst);
+['needed','layout'].forEach(id => { $(id).addEventListener('input', () => { invalidate(); renderEst(); }); $(id).addEventListener('change', () => { invalidate(); renderEst(); }); });
+['name','xuser','notes'].forEach(id => $(id).addEventListener('input', invalidate));
+['name','xuser','needed'].forEach(id => $(id).addEventListener('input', () => $('f_' + (id === 'xuser' ? 'x' : id)).classList.remove('bad')));
 
-/* ---------- submit ---------- */
-function summaryText(c, f){
-  const L = ['ORDER REQUEST — ' + CONFIG.shop, ''];
-  L.push('Name: ' + f.name, 'Contact: ' + f.phone, 'Email: ' + f.email, 'X: ' + f.x, 'Reach via: ' + f.reach, 'Needed by: ' + f.needed + (c.rush ? '  (RUSH)' : ''), '', 'Items:');
-  c.lines.forEach(l => L.push('• ' + l.qty + ' × ' + l.p.name + (l.p.note ? ' (' + l.p.note + ')' : '') + ' @ ' + peso(l.p.price) + ' = ' + peso(l.qty*l.p.price)));
-  c.layouts.forEach(l => L.push('• Layout — ' + l.name + ': ' + peso(l.fee)));
+/* ---------- summary (canvas) ---------- */
+let lastCanvas = null, lastText = '', lastName = '';
+function invalidate(){ $('result').hidden = true; lastCanvas = null; }
+function summaryData(){
+  const c = calc();
+  return {c, name: $('name').value.trim(), x: $('xuser').value.trim(), needed: $('needed').value, notes: $('notes').value.trim(), layout: $('layout').checked,
+          date: new Date().toLocaleDateString('en-PH', {year:'numeric', month:'short', day:'numeric'})};
+}
+function buildText(d){
+  const c = d.c, L = ['⋆.˚✮ ORDER SUMMARY ✮˚.⋆', CONFIG.shop, '', 'Name: ' + d.name, 'X: ' + d.x, 'Needed by: ' + niceDate(d.needed) + (c.rush ? '  (RUSH)' : ''), 'Date: ' + d.date, '', 'Items:'];
+  c.lines.forEach(x => { const t = desc(x.l); L.push('• ' + x.l.qty + ' ' + x.p.unit + (x.l.qty === 1 ? '' : 's') + ' × ' + t.name + (t.detail ? ' (' + t.detail + ')' : '') + ' @ ' + money(x.o.price) + ' = ' + peso(x.l.qty * x.o.price)); });
   L.push('', 'Subtotal (' + c.pieces + ' pcs): ' + peso(c.subtotal));
-  if(c.discount > 0) L.push('Bulk discount (' + c.pct + '%): -' + peso(c.discount));
-  if(c.layoutTotal > 0) L.push('Layout fees: ' + peso(c.layoutTotal));
-  if(c.rush > 0) L.push('Rush fee: ' + peso(c.rush));
-  L.push('ESTIMATED TOTAL: ' + peso(c.total), Math.round(CONFIG.dpRate*100) + '% down payment: ' + peso(c.dp));
-  if(f.notes) L.push('', 'Notes: ' + f.notes);
+  if(c.rush) L.push('Rush fee: ' + peso(c.rush));
+  L.push('ESTIMATED TOTAL: ' + peso(c.total), Math.round(CONFIG.dpRate * 100) + '% down payment: ' + peso(c.dp));
+  if(d.layout) L.push('', 'Layout: I need you to design it (fee quoted separately)');
+  if(d.notes) L.push('', 'Notes: ' + d.notes);
+  L.push('', 'This is an order request, not a confirmed order yet.');
   return L.join('\n');
 }
-function fields(){
-  return { name:$('name').value.trim(), phone:$('phone').value.trim(), email:$('email').value.trim(), x:$('xuser').value.trim(), reach:$('reach').value, needed:$('needed').value, notes:$('notes').value.trim() };
+function wrap(ctx, text, maxW){
+  const words = String(text).split(/\s+/), out = []; let cur = '';
+  words.forEach(w => { const t = cur ? cur + ' ' + w : w; if(ctx.measureText(t).width > maxW && cur){ out.push(cur); cur = w; } else cur = t; });
+  if(cur) out.push(cur); return out;
 }
-function validate(f, c){
-  const bad = {
-    f_name: !f.name, f_phone: !f.phone, f_email: !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email),
-    f_x: !f.x, f_reach: !f.reach, f_needed: !f.needed
+function drawSummary(d){
+  const W = 1240, MIN_H = 1748, M = 92, INK = '#2B2118', SOFT = '#7A6D5C', ACC = '#8A5A2B';
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = 5000;
+  const ctx = cv.getContext('2d');
+  const F = '"Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif';
+  ctx.fillStyle = '#FBF7EF'; ctx.fillRect(0, 0, W, cv.height);
+  ctx.textBaseline = 'alphabetic';
+  const font = (w, s) => { ctx.font = w + ' ' + s + 'px ' + F; };
+  const spaced = (t, px) => { if('letterSpacing' in ctx) ctx.letterSpacing = px + 'px'; return t; };
+  const c = d.c; let y = 120;
+  // header
+  ctx.fillStyle = INK; ctx.textAlign = 'center'; font(700, 58); ctx.fillText(CONFIG.shop, W/2, y); y += 52;
+  ctx.fillStyle = ACC; font(600, 24); ctx.fillText(spaced('ORDER SUMMARY', 7), W/2, y); if('letterSpacing' in ctx) ctx.letterSpacing = '0px'; y += 34;
+  ctx.fillStyle = INK; ctx.fillRect(M, y, W - 2*M, 3); y += 54;
+  // meta
+  ctx.textAlign = 'left';
+  const meta = [['Customer', d.name], ['X', d.x], ['Needed by', niceDate(d.needed) + (c.rush ? '   ⚡ RUSH' : '')], ['Date', d.date]];
+  meta.forEach(m => { ctx.fillStyle = SOFT; font(600, 26); ctx.fillText(m[0], M, y); ctx.fillStyle = INK; font(500, 28); ctx.fillText(m[1], M + 230, y); y += 46; });
+  y += 18;
+  // table header
+  const colQ = W - M - 400, colP = W - M - 210, colA = W - M;
+  ctx.fillStyle = SOFT; font(600, 21);
+  ctx.textAlign = 'left'; ctx.fillText(spaced('ITEM', 3), M, y); ctx.textAlign = 'right';
+  ctx.fillText('QTY', colQ, y); ctx.fillText('PRICE', colP, y); ctx.fillText('AMOUNT', colA, y);
+  if('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+  y += 18; ctx.fillStyle = INK; ctx.fillRect(M, y, W - 2*M, 2); y += 44;
+  // rows
+  c.lines.forEach(x => {
+    const t = desc(x.l);
+    font(600, 28); ctx.textAlign = 'left'; ctx.fillStyle = INK;
+    const lines = wrap(ctx, t.name, colQ - M - 110);
+    const y0 = y;
+    lines.forEach((ln, i) => { ctx.fillText(ln, M, y); if(i < lines.length - 1) y += 36; });
+    if(t.detail){ y += 34; font(500, 23); ctx.fillStyle = SOFT; ctx.fillText(t.detail, M, y); }
+    font(600, 28); ctx.fillStyle = INK; ctx.textAlign = 'right';
+    ctx.fillText(String(x.l.qty), colQ, y0); ctx.fillText(money(x.o.price), colP, y0); ctx.fillText(peso(x.l.qty * x.o.price), colA, y0);
+    y += 26; ctx.fillStyle = '#CDBFA6'; for(let xx = M; xx < W - M; xx += 12) ctx.fillRect(xx, y, 6, 2); y += 44;
+  });
+  // totals
+  const line = (label, val, bold) => { font(bold ? 700 : 500, bold ? 40 : 28); ctx.fillStyle = INK; ctx.textAlign = 'left'; ctx.fillText(label, M, y); ctx.textAlign = 'right'; ctx.fillText(val, colA, y); y += bold ? 62 : 42; };
+  y += 4;
+  line('Subtotal (' + c.pieces + ' pc' + (c.pieces === 1 ? '' : 's') + ')', peso(c.subtotal));
+  if(c.rush) line('Rush fee', peso(c.rush));
+  ctx.fillStyle = INK; ctx.fillRect(M, y - 8, W - 2*M, 2); y += 40;
+  line('ESTIMATED TOTAL', peso(c.total), true);
+  ctx.fillRect(M, y - 38, W - 2*M, 2);
+  line('Down payment (' + Math.round(CONFIG.dpRate * 100) + '%)', peso(c.dp));
+  // extras
+  const para = (title, text) => {
+    y += 18; ctx.fillStyle = ACC; font(700, 21); ctx.textAlign = 'left'; ctx.fillText(spaced(title.toUpperCase(), 3), M, y); if('letterSpacing' in ctx) ctx.letterSpacing = '0px'; y += 40;
+    ctx.fillStyle = INK; font(500, 26); wrap(ctx, text, W - 2*M).forEach(ln => { ctx.fillText(ln, M, y); y += 36; });
   };
+  if(d.layout) para('Layout', 'I need you to design my layout (fee quoted separately).');
+  if(d.notes) para('Notes', d.notes);
+  // footer
+  y += 40; ctx.fillStyle = INK; ctx.fillRect(M, y, W - 2*M, 2); y += 48;
+  ctx.textAlign = 'center'; ctx.fillStyle = INK; font(500, 24);
+  ['This is an order request, not a confirmed order yet.', 'We’ll review it and message you with your quote.', 'Estimate only — shipping fee not included.'].forEach(t => { ctx.fillText(t, W/2, y); y += 36; });
+  y += 10; ctx.fillStyle = SOFT; font(500, 21); ctx.fillText(CONFIG.shop + (CONFIG.contactHandle ? ' · ' + CONFIG.contactHandle : ''), W/2, y); y += 70;
+  const H = Math.max(MIN_H, Math.ceil(y));
+  const out = document.createElement('canvas'); out.width = W; out.height = H;
+  const o = out.getContext('2d'); o.fillStyle = '#FBF7EF'; o.fillRect(0, 0, W, H); o.drawImage(cv, 0, 0, W, H, 0, 0, W, H);
+  o.strokeStyle = '#D9CDB8'; o.lineWidth = 4; o.strokeRect(2, 2, W - 4, H - 4);
+  return out;
+}
+
+/* ---------- PDF (no libraries): one page with the summary image ---------- */
+function makePdf(canvas){
+  const jpeg = atob(canvas.toDataURL('image/jpeg', 0.92).split(',')[1]);
+  const img = new Uint8Array(jpeg.length); for(let i = 0; i < jpeg.length; i++) img[i] = jpeg.charCodeAt(i);
+  const ptW = 297.64, ptH = Math.round(ptW * canvas.height / canvas.width * 100) / 100;
+  const enc = new TextEncoder(), parts = [], offs = []; let pos = 0;
+  const push = b => { parts.push(b); pos += b.length; };
+  const str = s => push(enc.encode(s));
+  str('%PDF-1.4\n');
+  const obj = (n, body) => { offs[n] = pos; str(n + ' 0 obj\n' + body + '\nendobj\n'); };
+  obj(1, '<< /Type /Catalog /Pages 2 0 R >>');
+  obj(2, '<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+  obj(3, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + ptW + ' ' + ptH + '] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>');
+  offs[4] = pos; str('4 0 obj\n<< /Type /XObject /Subtype /Image /Width ' + canvas.width + ' /Height ' + canvas.height + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + img.length + ' >>\nstream\n'); push(img); str('\nendstream\nendobj\n');
+  const content = 'q ' + ptW + ' 0 0 ' + ptH + ' 0 0 cm /Im0 Do Q';
+  obj(5, '<< /Length ' + content.length + ' >>\nstream\n' + content + '\nendstream');
+  const xref = pos;
+  let x = 'xref\n0 6\n0000000000 65535 f \n';
+  for(let i = 1; i <= 5; i++) x += String(offs[i]).padStart(10, '0') + ' 00000 n \n';
+  str(x + 'trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n' + xref + '\n%%EOF');
+  return new Blob(parts, {type:'application/pdf'});
+}
+function download(blob, filename){
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+}
+function pngBlob(canvas){ return new Promise(res => canvas.toBlob(res, 'image/png')); }
+
+/* ---------- create / download ---------- */
+function validate(d){
+  const bad = {f_name: !d.name, f_x: !d.x, f_needed: !d.needed};
   Object.keys(bad).forEach(id => $(id).classList.toggle('bad', bad[id]));
-  const msg = $('formMsg'); msg.className = 'msg'; msg.textContent = '';
-  if(!c.lines.length){ msg.className = 'msg bad'; msg.textContent = 'Please add at least one item to your order.'; return false; }
-  if(Object.values(bad).some(Boolean)){ msg.className = 'msg bad'; msg.textContent = 'Please fix the highlighted fields.'; const first = document.querySelector('.field.bad'); if(first) first.scrollIntoView({behavior:'smooth', block:'center'}); return false; }
+  const m = $('msg'); m.className = 'msg'; m.textContent = '';
+  if(!d.c.lines.length){ m.className = 'msg on'; m.textContent = 'Please tap at least one price to add an item.'; return false; }
+  if(d.c.lines.some(x => x.l.qty < x.p.min)){ m.className = 'msg on'; m.textContent = 'Some items are below their minimum order.'; return false; }
+  if(Object.values(bad).some(Boolean)){ m.className = 'msg on'; m.textContent = 'Please fill in the highlighted fields.'; const f = document.querySelector('.field.bad'); if(f) f.scrollIntoView({behavior:'smooth', block:'center'}); return false; }
   return true;
 }
-async function copyText(t){
-  try { await navigator.clipboard.writeText(t); return true; }
-  catch(e){ const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); let ok = false; try { ok = document.execCommand('copy'); } catch(_){} ta.remove(); return ok; }
+async function makeSummary(){
+  const d = summaryData(); if(!validate(d)) return;
+  try { await document.fonts.load('700 40px "Space Grotesk"'); await document.fonts.load('500 24px "Space Grotesk"'); } catch(e) {}
+  lastCanvas = drawSummary(d); lastText = buildText(d);
+  lastName = 'Order-Summary-' + (d.name.replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'customer');
+  const pv = $('preview'); pv.width = lastCanvas.width; pv.height = lastCanvas.height; pv.getContext('2d').drawImage(lastCanvas, 0, 0);
+  $('sendNote').textContent = 'Download the PDF or image (or copy the text) and send it to us' + (CONFIG.contactHandle ? ' at ' + CONFIG.contactHandle : '') + '. We’ll check it, then send you the payment form for the down payment if it’s doable.';
+  $('shareBtn').hidden = !(navigator.canShare && navigator.canShare({files:[new File([''], 'a.png', {type:'image/png'})]}));
+  $('result').hidden = false;
+  $('result').scrollIntoView({behavior:'smooth', block:'start'});
 }
-function showThanks(text, sent){
-  $('orderForm').hidden = true;
-  const t = $('thanks'); t.hidden = false;
-  t.innerHTML = `<div style="font-size:36px;">${sent?'💌':'📋'}</div>
-    <h2>${sent?'Order request sent!':'Almost there!'}</h2>
-    <p>${sent?'Thank you! We’ll message you soon with your quote.':'Ordering isn’t connected to email yet, so your order summary was copied. Please send it to us in a message.'}</p>
-    <div class="sum">${esc(text)}</div>
-    <button class="btn alt" type="button" id="copyAgain">Copy my order summary</button><br>
-    <button class="btn" type="button" id="newOrder" style="margin-top:10px;">Start a new order</button>`;
-  $('copyAgain').onclick = async e => { if(await copyText(text)) e.target.textContent = '✓ Copied'; };
-  $('newOrder').onclick = () => { cart = {}; save(); $('orderForm').reset(); $('orderForm').hidden = false; t.hidden = true; show('products'); };
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-$('orderForm').addEventListener('submit', async e => {
-  e.preventDefault();
-  const c = calc(), f = fields();
-  if(!validate(f, c)) return;
-  if($('botcheck').value) return;   // spam trap
-  const text = summaryText(c, f);
-  const key = CONFIG.accessKey;
-  if(!key || key.indexOf('YOUR_') === 0){ await copyText(text); showThanks(text, false); return; }
-  const btn = $('submitBtn'); btn.disabled = true; btn.textContent = 'Sending…';
-  try {
-    const res = await fetch('https://api.web3forms.com/submit', {
-      method:'POST', headers:{'Content-Type':'application/json', 'Accept':'application/json'},
-      body: JSON.stringify({
-        access_key: key, subject: 'New order request — ' + f.name + ' — ' + peso(c.total), from_name: CONFIG.shop,
-        name: f.name, email: f.email, contact_number: f.phone, x_username: f.x, reach_via: f.reach, needed_by: f.needed,
-        rush: c.rush ? 'YES' : 'no', estimated_total: peso(c.total), down_payment: peso(c.dp), order: text, botcheck: ''
-      })
-    });
-    const data = await res.json();
-    if(data && data.success){ cart = {}; save(); showThanks(text, true); }
-    else throw new Error((data && data.message) || 'Could not send');
-  } catch(err) {
-    const msg = $('formMsg'); msg.className = 'msg bad';
-    msg.textContent = 'Sorry, we couldn’t send that. Please try again, or message us your order directly.';
-    await copyText(text);
-  } finally { btn.disabled = false; btn.textContent = 'Send order request'; }
-});
+$('makeBtn').onclick = makeSummary;
+$('dlPdf').onclick = () => { if(lastCanvas) download(makePdf(lastCanvas), lastName + '.pdf'); };
+$('dlPng').onclick = async () => { if(lastCanvas) download(await pngBlob(lastCanvas), lastName + '.png'); };
+$('cpTxt').onclick = async e => {
+  let ok = false;
+  try { await navigator.clipboard.writeText(lastText); ok = true; } catch(x) { const ta = document.createElement('textarea'); ta.value = lastText; document.body.appendChild(ta); ta.select(); try { ok = document.execCommand('copy'); } catch(_) {} ta.remove(); }
+  const b = e.target; const t = b.textContent; b.textContent = ok ? '✓ Copied' : 'Copy failed'; setTimeout(() => { b.textContent = t; }, 1500);
+};
+$('shareBtn').onclick = async () => {
+  if(!lastCanvas) return;
+  try { const f = new File([await pngBlob(lastCanvas)], lastName + '.png', {type:'image/png'}); await navigator.share({files:[f], title:'Order summary', text:lastText}); } catch(e) {}
+};
 
-renderProducts();
+renderTables();
 refresh();
 </script>
 </body>
