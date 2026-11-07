@@ -61,6 +61,8 @@ table.pt td.mn{font-size:12px;color:var(--soft);white-space:nowrap;}
 .stepper{display:flex;align-items:center;gap:8px;}
 .stepper button{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--accent);background:transparent;color:var(--accent);font:inherit;font-size:18px;font-weight:700;cursor:pointer;line-height:1;}
 .stepper .q{min-width:28px;text-align:center;font-weight:700;}
+.ln{width:100%;margin-top:8px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink);font:inherit;font-size:12.5px;}
+.exc{display:inline-block;margin-top:6px;padding:2px 9px;border-radius:10px;border:1px solid var(--accent);color:var(--accent);font-size:11px;font-weight:600;}
 .lk{border:0;background:transparent;color:var(--soft);font:inherit;font-size:11.5px;text-decoration:underline;cursor:pointer;padding:2px 4px;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;}
 @media (max-width:560px){.grid2{grid-template-columns:1fr;}}
@@ -128,8 +130,9 @@ table.pt td.mn{font-size:12px;color:var(--soft);white-space:nowrap;}
     </div>
     <div class="field" id="f_needed" style="max-width:260px;"><label for="needed">Needed by</label><input id="needed" type="date"><div class="err">Please choose the date you need it by.</div></div>
     <div class="note" id="rushHint" style="margin:-4px 0 12px;"></div>
-    <label class="chk"><input type="checkbox" id="layout"> <span>I need you to design my layout</span></label>
-    <div class="field"><label for="notes">Notes (optional)</label><textarea id="notes" placeholder="Group/artist, designs, links to your references…"></textarea></div>
+    <label class="chk"><input type="checkbox" id="layout"> <span>I need you to design my layout — <b id="layoutFeeTxt"></b> per design</span></label>
+    <div class="field" id="designsWrap" style="max-width:280px;display:none;"><label for="designs">How many designs?</label><input id="designs" type="number" min="1" value="1"><div class="note" style="margin-top:4px;">The layout fee is per design, no matter how many pieces you order.</div></div>
+    <div class="field"><label for="notes">Notes, special instructions or quantity requests (optional)</label><textarea id="notes" placeholder="Group/artist, designs, links to your references, or anything you’d like to ask us…"></textarea></div>
   </div>
 
   <div class="sec">
@@ -180,6 +183,7 @@ table.pt td.mn{font-size:12px;color:var(--soft);white-space:nowrap;}
 const CONFIG = {
   shop: 'Adobong Tiramisu Prints',
   contactHandle: '',      // optional, e.g. '@yourhandle' — shown in the "send it to us" note
+  layoutFee: 30,          // ₱ per design (any quantity), if the customer wants you to design their layout
   dpRate: 0.30,           // down payment
   rushDays: 4,            // needed in this many days or fewer = rush
   rushFee: 100            // ₱
@@ -283,9 +287,13 @@ function calc(){
   const subtotal = lines.reduce((s, x) => s + x.l.qty * x.o.price, 0);
   const d = daysUntil($('needed').value);
   const rush = (d !== null && d <= CONFIG.rushDays) ? CONFIG.rushFee : 0;
-  const total = subtotal + rush;
-  return {lines, pieces, subtotal, rush, days:d, total, dp: Math.round(total * CONFIG.dpRate * 100) / 100};
+  const designs = $('layout').checked ? Math.max(1, parseInt($('designs').value) || 1) : 0;
+  const layoutTotal = designs * CONFIG.layoutFee;
+  const total = subtotal + layoutTotal + rush;
+  return {lines, pieces, subtotal, designs, layoutTotal, rush, days:d, total, dp: Math.round(total * CONFIG.dpRate * 100) / 100};
 }
+const effMin = x => x.l.exc ? 1 : x.p.min;
+function layoutLabel(c){ return 'Layout fee (' + c.designs + ' design' + (c.designs === 1 ? '' : 's') + ' × ' + money(CONFIG.layoutFee) + ')'; }
 function renderLines(){
   const c = calc();
   if(!c.lines.length){ $('lines').innerHTML = '<div class="empty">Nothing here yet. Tap a price in the table above to add it.</div>'; return; }
@@ -301,17 +309,25 @@ function renderLines(){
       '<div class="stepper"><button type="button" data-lid="' + x.l.lid + '" data-q="-1" aria-label="Less">−</button><span class="q">' + x.l.qty + '</span><button type="button" data-lid="' + x.l.lid + '" data-q="1" aria-label="More">+</button></div>' +
       '<div class="amt">' + money(x.l.qty * o.price) + '</div></div>' +
       (opts ? '<div class="opts">' + opts + '</div>' : '') +
-      '<div><button type="button" class="lk" data-lid="' + x.l.lid + '" data-rm="1">Remove</button>' + (o.choices ? '<button type="button" class="lk" data-lid="' + x.l.lid + '" data-dup="1">+ add another style</button>' : '') + '</div></div>';
+      '<input class="ln" data-lid="' + x.l.lid + '" placeholder="Special instructions for this item (optional)" value="' + esc(x.l.note || '') + '">' +
+      (x.l.exc ? '<span class="exc">Exception requested · min. ' + x.p.min + '</span> ' : '') +
+      '<div><button type="button" class="lk" data-lid="' + x.l.lid + '" data-rm="1">Remove</button>' + (o.choices ? '<button type="button" class="lk" data-lid="' + x.l.lid + '" data-dup="1">+ add another style</button>' : '') +
+      (x.p.min > 1 ? (x.l.exc ? '<button type="button" class="lk" data-lid="' + x.l.lid + '" data-exc="0">Cancel exception</button>' : '<button type="button" class="lk" data-lid="' + x.l.lid + '" data-exc="1">Need less than the minimum? Ask for an exception</button>') : '') + '</div></div>';
   }).join('');
 }
 $('lines').addEventListener('click', e => {
   const b = e.target.closest('button[data-lid]'); if(!b) return;
   const l = cart.find(x => x.lid === parseInt(b.dataset.lid)); if(!l) return;
   const p = prod(l.pid);
-  if(b.dataset.q){ const n = l.qty + parseInt(b.dataset.q); if(n < p.min) cart = cart.filter(x => x !== l); else l.qty = n; }
+  if(b.dataset.q){ const n = l.qty + parseInt(b.dataset.q); if(n < (l.exc ? 1 : p.min)) cart = cart.filter(x => x !== l); else l.qty = n; }
+  else if(b.dataset.exc){ l.exc = b.dataset.exc === '1'; if(!l.exc && l.qty < p.min) l.qty = p.min; }
   else if(b.dataset.rm){ cart = cart.filter(x => x !== l); }
   else if(b.dataset.dup){ const n = newLine(l.pid, l.oi); cart.splice(cart.indexOf(l) + 1, 0, n); }
   invalidate(); refresh();
+});
+$('lines').addEventListener('input', e => {
+  const n = e.target.closest('input.ln'); if(!n) return;
+  const l = cart.find(x => x.lid === parseInt(n.dataset.lid)); if(l){ l.note = n.value; invalidate(); }
 });
 $('lines').addEventListener('change', e => {
   const s = e.target.closest('select[data-lid]'); if(!s) return;
@@ -328,9 +344,10 @@ function renderEst(){
   if(!c.lines.length){ $('est').innerHTML = '<div class="note" style="margin:0;">Add items to see your estimate.</div>'; return; }
   const row = (a, b, cls) => '<div class="r ' + (cls || '') + '"><span>' + a + '</span><span>' + b + '</span></div>';
   let h = row('Subtotal (' + c.pieces + ' pc' + (c.pieces === 1 ? '' : 's') + ')', peso(c.subtotal));
+  if(c.layoutTotal) h += row(layoutLabel(c), peso(c.layoutTotal));
   if(c.rush) h += row('Rush fee', peso(c.rush));
   h += row('Estimated total', peso(c.total), 'tt') + row('Down payment (' + Math.round(CONFIG.dpRate * 100) + '%)', peso(c.dp));
-  h += '<div class="s">This is an estimate. Shipping is paid by the buyer and isn’t included' + ($('layout').checked ? '; layout fee is quoted separately' : '') + '. We’ll confirm everything in your quote.</div>';
+  h += '<div class="s">This is an estimate. Shipping is paid by the buyer and isn’t included. We’ll confirm everything in your quote.</div>';
   $('est').innerHTML = h;
 }
 function refresh(){
@@ -349,7 +366,9 @@ function refresh(){
 }
 $('barGo').onclick = () => $('orderSec').scrollIntoView({behavior:'smooth'});
 $('needed').min = todayStr();
-['needed','layout'].forEach(id => { $(id).addEventListener('input', () => { invalidate(); renderEst(); }); $(id).addEventListener('change', () => { invalidate(); renderEst(); }); });
+$('layoutFeeTxt').textContent = money(CONFIG.layoutFee);
+$('layout').addEventListener('change', () => { $('designsWrap').style.display = $('layout').checked ? 'block' : 'none'; });
+['needed','layout','designs'].forEach(id => { $(id).addEventListener('input', () => { invalidate(); renderEst(); }); $(id).addEventListener('change', () => { invalidate(); renderEst(); }); });
 ['name','xuser','notes'].forEach(id => $(id).addEventListener('input', invalidate));
 ['name','xuser','needed'].forEach(id => $(id).addEventListener('input', () => $('f_' + (id === 'xuser' ? 'x' : id)).classList.remove('bad')));
 
@@ -363,11 +382,11 @@ function summaryData(){
 }
 function buildText(d){
   const c = d.c, L = ['⋆.˚✮ ORDER SUMMARY ✮˚.⋆', CONFIG.shop, '', 'Name: ' + d.name, 'X: ' + d.x, 'Needed by: ' + niceDate(d.needed) + (c.rush ? '  (RUSH)' : ''), 'Date: ' + d.date, '', 'Items:'];
-  c.lines.forEach(x => { const t = desc(x.l); L.push('• ' + x.l.qty + ' ' + x.p.unit + (x.l.qty === 1 ? '' : 's') + ' × ' + t.name + (t.detail ? ' (' + t.detail + ')' : '') + ' @ ' + money(x.o.price) + ' = ' + peso(x.l.qty * x.o.price)); });
+  c.lines.forEach(x => { const t = desc(x.l); L.push('• ' + x.l.qty + ' ' + x.p.unit + (x.l.qty === 1 ? '' : 's') + ' × ' + t.name + (t.detail ? ' (' + t.detail + ')' : '') + ' @ ' + money(x.o.price) + ' = ' + peso(x.l.qty * x.o.price)); if(x.l.note) L.push('   ↳ ' + x.l.note); if(x.l.exc && x.l.qty < x.p.min) L.push('   ⚠ below the minimum of ' + x.p.min + ' — exception requested'); });
   L.push('', 'Subtotal (' + c.pieces + ' pcs): ' + peso(c.subtotal));
+  if(c.layoutTotal) L.push(layoutLabel(c) + ': ' + peso(c.layoutTotal));
   if(c.rush) L.push('Rush fee: ' + peso(c.rush));
   L.push('ESTIMATED TOTAL: ' + peso(c.total), Math.round(CONFIG.dpRate * 100) + '% down payment: ' + peso(c.dp));
-  if(d.layout) L.push('', 'Layout: I need you to design it (fee quoted separately)');
   if(d.notes) L.push('', 'Notes: ' + d.notes);
   L.push('', 'This is an order request, not a confirmed order yet.');
   return L.join('\n');
@@ -410,7 +429,9 @@ function drawSummary(d){
     const lines = wrap(ctx, t.name, colQ - M - 110);
     const y0 = y;
     lines.forEach((ln, i) => { ctx.fillText(ln, M, y); if(i < lines.length - 1) y += 36; });
-    if(t.detail){ y += 34; font(500, 23); ctx.fillStyle = SOFT; ctx.fillText(t.detail, M, y); }
+    if(t.detail){ y += 34; font(500, 23); ctx.fillStyle = SOFT; ctx.textAlign = 'left'; ctx.fillText(t.detail, M, y); }
+    if(x.l.note){ font(500, 23); ctx.fillStyle = SOFT; ctx.textAlign = 'left'; wrap(ctx, '↳ ' + x.l.note, colQ - M - 110).forEach(ln => { y += 32; ctx.fillText(ln, M, y); }); }
+    if(x.l.exc && x.l.qty < x.p.min){ y += 32; font(600, 22); ctx.fillStyle = ACC; ctx.textAlign = 'left'; ctx.fillText('⚠ Below the minimum of ' + x.p.min + ' — exception requested', M, y); }
     font(600, 28); ctx.fillStyle = INK; ctx.textAlign = 'right';
     ctx.fillText(String(x.l.qty), colQ, y0); ctx.fillText(money(x.o.price), colP, y0); ctx.fillText(peso(x.l.qty * x.o.price), colA, y0);
     y += 26; ctx.fillStyle = '#CDBFA6'; for(let xx = M; xx < W - M; xx += 12) ctx.fillRect(xx, y, 6, 2); y += 44;
@@ -419,6 +440,7 @@ function drawSummary(d){
   const line = (label, val, bold) => { font(bold ? 700 : 500, bold ? 40 : 28); ctx.fillStyle = INK; ctx.textAlign = 'left'; ctx.fillText(label, M, y); ctx.textAlign = 'right'; ctx.fillText(val, colA, y); y += bold ? 62 : 42; };
   y += 4;
   line('Subtotal (' + c.pieces + ' pc' + (c.pieces === 1 ? '' : 's') + ')', peso(c.subtotal));
+  if(c.layoutTotal) line(layoutLabel(c), peso(c.layoutTotal));
   if(c.rush) line('Rush fee', peso(c.rush));
   ctx.fillStyle = INK; ctx.fillRect(M, y - 8, W - 2*M, 2); y += 40;
   line('ESTIMATED TOTAL', peso(c.total), true);
@@ -429,8 +451,7 @@ function drawSummary(d){
     y += 18; ctx.fillStyle = ACC; font(700, 21); ctx.textAlign = 'left'; ctx.fillText(spaced(title.toUpperCase(), 3), M, y); if('letterSpacing' in ctx) ctx.letterSpacing = '0px'; y += 40;
     ctx.fillStyle = INK; font(500, 26); wrap(ctx, text, W - 2*M).forEach(ln => { ctx.fillText(ln, M, y); y += 36; });
   };
-  if(d.layout) para('Layout', 'I need you to design my layout (fee quoted separately).');
-  if(d.notes) para('Notes', d.notes);
+  if(d.notes) para('Notes / requests', d.notes);
   // footer
   y += 40; ctx.fillStyle = INK; ctx.fillRect(M, y, W - 2*M, 2); y += 48;
   ctx.textAlign = 'center'; ctx.fillStyle = INK; font(500, 24);
@@ -477,7 +498,7 @@ function validate(d){
   Object.keys(bad).forEach(id => $(id).classList.toggle('bad', bad[id]));
   const m = $('msg'); m.className = 'msg'; m.textContent = '';
   if(!d.c.lines.length){ m.className = 'msg on'; m.textContent = 'Please tap at least one price to add an item.'; return false; }
-  if(d.c.lines.some(x => x.l.qty < x.p.min)){ m.className = 'msg on'; m.textContent = 'Some items are below their minimum order.'; return false; }
+  if(d.c.lines.some(x => x.l.qty < effMin(x))){ m.className = 'msg on'; m.textContent = 'Some items are below their minimum order.'; return false; }
   if(Object.values(bad).some(Boolean)){ m.className = 'msg on'; m.textContent = 'Please fill in the highlighted fields.'; const f = document.querySelector('.field.bad'); if(f) f.scrollIntoView({behavior:'smooth', block:'center'}); return false; }
   return true;
 }
